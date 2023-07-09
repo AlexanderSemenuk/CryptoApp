@@ -22,7 +22,7 @@ namespace CryptoApp.Models
         
         public async Task<List<Cryptocurrency>> GetCryptocurrencies()
         {
-            string url = "https://api.coincap.io/v2/assets";
+            string url = "https://api.coincap.io/v2/assets?limit=20";
             HttpClient client = new HttpClient();
 
             var response = await client.GetAsync(url);
