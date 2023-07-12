@@ -8,6 +8,7 @@ using CryptoApp.Models;
 using System.Windows;
 using CryptoApp.ViewModels;
 using System.DirectoryServices;
+using System.Windows.Input;
 
 namespace CryptoApp
 {
@@ -36,6 +37,25 @@ namespace CryptoApp
             List<Cryptocurrency> results = cryptoViewModel.SearchCryptocurrencies(searchString);
             ObservableCollection<Cryptocurrency> filteredCryptocurrencies = new ObservableCollection<Cryptocurrency>(results);
             lbResults.ItemsSource = filteredCryptocurrencies;
+        }
+        private void SortByRank(object sender, MouseButtonEventArgs e)
+        {
+            CryptoViewModel viewModel = DataContext as CryptoViewModel;
+            viewModel?.SortByRank(sender, e); // Вызов метода SortByRank из вашей ViewModel
+        }
+        private void SortByPrice(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByPrice(sender, e);
+            }
+        }
+        private void SortByName(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByName(sender, e);
+            }
         }
     }
 
