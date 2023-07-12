@@ -7,36 +7,41 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace CryptoApp.Converters
 {
-    public class StringToDoubleConverter : MarkupExtension, IValueConverter
+    public class PercentageColorConverter : MarkupExtension, IValueConverter
     {
-        private static StringToDoubleConverter _instance;
+        private static PercentageColorConverter _instance;
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             if (_instance == null)
             {
-                _instance = new StringToDoubleConverter();
+                _instance = new PercentageColorConverter();
             }
             return _instance;
         }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string stringValue)
+            if (value is double changePercent)
             {
-                if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double result))
+                if (changePercent < 0)
                 {
-                    return result;
+                    return new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    return new SolidColorBrush(Colors.Green);
                 }
             }
 
-            return DependencyProperty.UnsetValue;
+            return Binding.DoNothing;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
-
     }
 }

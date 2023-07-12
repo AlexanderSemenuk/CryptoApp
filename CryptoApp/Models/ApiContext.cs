@@ -13,7 +13,6 @@ namespace CryptoApp.Models
     internal class ApiContext
     {
         private readonly HttpClient httpClient;
-        private readonly string apiUrl = "https://api.coincap.io/v2/assets";
 
         public ApiContext()
         {
@@ -22,7 +21,7 @@ namespace CryptoApp.Models
         
         public async Task<List<Cryptocurrency>> GetCryptocurrencies()
         {
-            string url = "https://api.coincap.io/v2/assets?limit=20";
+            string url = "https://api.coincap.io/v2/assets?limit=200";
             HttpClient client = new HttpClient();
 
             var response = await client.GetAsync(url);
