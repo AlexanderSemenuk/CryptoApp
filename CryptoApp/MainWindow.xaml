@@ -37,11 +37,11 @@
             <TextBlock Text="Rank" MouseLeftButtonDown="SortByRank" Grid.Row="0" Grid.ColumnSpan="2" Margin="10,20,-10,-20" />
             <TextBlock Text="Name" MouseLeftButtonDown="SortByName" Grid.ColumnSpan="2" Margin="94,20,-94,-20" />
             <TextBlock Text="Price" MouseLeftButtonDown="SortByPrice"  Grid.Row="0" Grid.ColumnSpan="2" Margin="231,20,-231,-20" />
-            <TextBlock Text="Market cap"  Grid.Row="0" Grid.ColumnSpan="2" Margin="308,20,-308,-20" />
-            <TextBlock Text="VWAP(24Hr)"  Grid.Row="0" Grid.ColumnSpan="2" Margin="403,20,-403,-20" />
-            <TextBlock Text="Supply"  Grid.Row="0" Grid.ColumnSpan="2" Margin="505,20,-506,-20" />
-            <TextBlock Text="Volume(24Hr)"  Grid.Row="0" Grid.ColumnSpan="2" Margin="582,20,-582,-20" />
-            <TextBlock Text="Change (24Hr)"  Grid.Row="0" Grid.ColumnSpan="2" Margin="673,20,-673,-20" />
+            <TextBlock Text="Market cap"  MouseLeftButtonDown="SortByMarketCap" Grid.Row="0" Grid.ColumnSpan="2" Margin="308,20,-308,-20" />
+            <TextBlock Text="VWAP(24Hr)" MouseLeftButtonDown="SortByVwap" Grid.Row="0" Grid.ColumnSpan="2" Margin="403,20,-403,-20" />
+            <TextBlock Text="Supply" MouseLeftButtonDown="SortBySupply" Grid.Row="0" Grid.ColumnSpan="2" Margin="505,20,-506,-20" />
+            <TextBlock Text="Volume(24Hr)" MouseLeftButtonDown="SortByVolume" Grid.Row="0" Grid.ColumnSpan="2" Margin="582,20,-582,-20" />
+            <TextBlock Text="Change (24Hr)" MouseLeftButtonDown="SortBySupply" Grid.Row="0" Grid.ColumnSpan="2" Margin="673,20,-673,-20" />
         </Grid>
 
         <ListView x:Name="lbResults" Grid.Row="1" ItemsSource="{Binding Cryptocurrencies}" Grid.ColumnSpan="2">

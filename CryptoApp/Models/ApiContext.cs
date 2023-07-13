@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CryptoApp.Models
 {
-    internal class ApiContext
+    public class ApiContext
     {
         private readonly HttpClient httpClient;
 
@@ -44,7 +44,7 @@ namespace CryptoApp.Models
                     volumeUsd24Hr = item.volumeUsd24Hr,
                     priceUsd = item.priceUsd,
                     changePercent24Hr = item.changePercent24Hr,
-                    vwap24Hr = item.vwap24Hr,
+                    vwap24Hr = item.vwap24Hr == null ? "-" : item.vwap24Hr,
                     imageUrl = $"https://assets.coincap.io/assets/icons/{item.symbol.ToString().ToLower()}@2x.png"
                 };
                 cryptoList.Add(cryptocurrency);

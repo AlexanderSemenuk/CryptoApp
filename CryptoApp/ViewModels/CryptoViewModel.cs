@@ -15,6 +15,7 @@ namespace CryptoApp.ViewModels
 {
     public class CryptoViewModel : INotifyPropertyChanged
     {
+
         private bool isAscending = true;
         private ObservableCollection<Cryptocurrency> _cryptocurrencies;
         public ObservableCollection<Cryptocurrency> Cryptocurrencies
@@ -92,7 +93,6 @@ namespace CryptoApp.ViewModels
         }
         public void SortByPrice(object sender, MouseButtonEventArgs e)
         {
-            bool isPriceAscending = true;
             if (Cryptocurrencies != null)
             {
                 List<Cryptocurrency> sortedCryptocurrencies;
@@ -130,6 +130,136 @@ namespace CryptoApp.ViewModels
                 else
                 {
                     sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto => crypto.name).ToList();
+                }
+
+                Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);
+                isAscending = !isAscending;
+            }
+        }
+        public void SortByMarketCap(object sender, MouseButtonEventArgs e)
+        {
+            if (Cryptocurrencies != null)
+            {
+                List<Cryptocurrency> sortedCryptocurrencies;
+                if (isAscending)
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderBy(crypto =>
+                    {
+                        decimal price;
+                        return decimal.TryParse(crypto.marketCapUsd, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : decimal.MinValue;
+                    }).ToList();
+                }
+                else
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto =>
+                    {
+                        decimal price;
+                        return decimal.TryParse(crypto.marketCapUsd, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : decimal.MinValue;
+                    }).ToList();
+                }
+
+                Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);
+                isAscending = !isAscending;
+            }
+        }
+        public void SortByVwap(object sender, MouseButtonEventArgs e)
+        {
+            if (Cryptocurrencies != null)
+            {
+                List<Cryptocurrency> sortedCryptocurrencies;
+                if (isAscending)
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderBy(crypto =>
+                    {
+                        decimal price;
+                        return decimal.TryParse(crypto.vwap24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : decimal.MinValue;
+                    }).ToList();
+                }
+                else
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto =>
+                    {
+                        decimal price;
+                        return decimal.TryParse(crypto.vwap24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : decimal.MinValue;
+                    }).ToList();
+                }
+
+                Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);
+                isAscending = !isAscending;
+            }
+        }
+        public void SortBySupply(object sender, MouseButtonEventArgs e)
+        {
+            if (Cryptocurrencies != null)
+            {
+                List<Cryptocurrency> sortedCryptocurrencies;
+                if (isAscending)
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderBy(crypto =>
+                    {
+                        decimal supply;
+                        return decimal.TryParse(crypto.supply, NumberStyles.Number, CultureInfo.InvariantCulture, out supply) ? supply : decimal.MinValue;
+                    }).ToList();
+                }
+                else
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto =>
+                    {
+                        decimal supply;
+                        return decimal.TryParse(crypto.supply, NumberStyles.Number, CultureInfo.InvariantCulture, out supply) ? supply : decimal.MinValue;
+                    }).ToList();
+                }
+
+                Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);
+                isAscending = !isAscending;
+            }
+        }
+        public void SortByVolume(object sender, MouseButtonEventArgs e)
+        {
+            if (Cryptocurrencies != null)
+            {
+                List<Cryptocurrency> sortedCryptocurrencies;
+                if (isAscending)
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderBy(crypto =>
+                    {
+                        decimal volume;
+                        return decimal.TryParse(crypto.volumeUsd24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out volume) ? volume : decimal.MinValue;
+                    }).ToList();
+                }
+                else
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto =>
+                    {
+                        decimal volume;
+                        return decimal.TryParse(crypto.volumeUsd24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out volume) ? volume : decimal.MinValue;
+                    }).ToList();
+                }
+
+                Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);
+                isAscending = !isAscending;
+            }
+        }
+        public void SortByChange(object sender, MouseButtonEventArgs e)
+        {
+            if (Cryptocurrencies != null)
+            {
+                List<Cryptocurrency> sortedCryptocurrencies;
+                if (isAscending)
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderBy(crypto =>
+                    {
+                        double price;
+                        return double.TryParse(crypto.changePercent24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : double.MinValue;
+                    }).ThenBy(crypto => Math.Abs(double.Parse(crypto.changePercent24Hr))).ToList();
+                }
+                else
+                {
+                    sortedCryptocurrencies = Cryptocurrencies.OrderByDescending(crypto =>
+                    {
+                        double price;
+                        return double.TryParse(crypto.changePercent24Hr, NumberStyles.Number, CultureInfo.InvariantCulture, out price) ? price : double.MinValue;
+                    }).ThenByDescending(crypto => Math.Abs(double.Parse(crypto.changePercent24Hr))).ToList();
                 }
 
                 Cryptocurrencies = new ObservableCollection<Cryptocurrency>(sortedCryptocurrencies);

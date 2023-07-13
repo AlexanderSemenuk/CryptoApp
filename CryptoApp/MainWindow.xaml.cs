@@ -40,8 +40,11 @@ namespace CryptoApp
         }
         private void SortByRank(object sender, MouseButtonEventArgs e)
         {
-            CryptoViewModel viewModel = DataContext as CryptoViewModel;
-            viewModel?.SortByRank(sender, e); // Вызов метода SortByRank из вашей ViewModel
+
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByRank(sender, e);
+            }
         }
         private void SortByPrice(object sender, MouseButtonEventArgs e)
         {
@@ -55,6 +58,41 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByName(sender, e);
+            }
+        }
+        private void SortByMarketCap(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByMarketCap(sender, e);
+            }
+        }
+        private void SortByVwap(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByVwap(sender, e);
+            }
+        }
+        private void SortBySupply(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortBySupply(sender, e);
+            }
+        }
+        private void SortByChange(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByChange(sender, e);
+            }
+        }
+        private void SortByVolume(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CryptoViewModel viewModel)
+            {
+                viewModel.SortByVolume(sender, e);
             }
         }
     }
