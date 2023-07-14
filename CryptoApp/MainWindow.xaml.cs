@@ -21,22 +21,19 @@ namespace CryptoApp
             cryptoViewModel = new CryptoViewModel();
             DataContext = cryptoViewModel;
         }
-
-        private void ListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchString = txtSearch.Text;
-            List<Cryptocurrency> results = cryptoViewModel.SearchCryptocurrencies(searchString);
-            ObservableCollection<Cryptocurrency> filteredCryptocurrencies = new ObservableCollection<Cryptocurrency>(results);
-            lbResults.ItemsSource = filteredCryptocurrencies;
+            if (string.IsNullOrEmpty(searchString))
+            {
+                cryptoViewModel.CurrentCurrencies = cryptoViewModel.Cryptocurrencies;
+                lbResults.ItemsSource = cryptoViewModel.CurrentCurrencies;
+            }
+            else
+            {
+                cryptoViewModel.PerformSearch(searchString);
+                lbResults.ItemsSource = cryptoViewModel.CurrentCurrencies;
+            }
         }
         private void SortByRank(object sender, MouseButtonEventArgs e)
         {
@@ -44,6 +41,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByRank(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByPrice(object sender, MouseButtonEventArgs e)
@@ -51,6 +49,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByPrice(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByName(object sender, MouseButtonEventArgs e)
@@ -58,6 +57,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByName(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByMarketCap(object sender, MouseButtonEventArgs e)
@@ -65,6 +65,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByMarketCap(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByVwap(object sender, MouseButtonEventArgs e)
@@ -72,6 +73,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByVwap(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortBySupply(object sender, MouseButtonEventArgs e)
@@ -79,6 +81,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortBySupply(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByChange(object sender, MouseButtonEventArgs e)
@@ -86,6 +89,7 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByChange(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
         }
         private void SortByVolume(object sender, MouseButtonEventArgs e)
@@ -93,7 +97,13 @@ namespace CryptoApp
             if (DataContext is CryptoViewModel viewModel)
             {
                 viewModel.SortByVolume(sender, e);
+                lbResults.ItemsSource = viewModel.CurrentCurrencies;
             }
+        }
+
+        private void lbResults_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 

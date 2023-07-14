@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
@@ -14,6 +10,7 @@ namespace CryptoApp.Converters
     public class PercentageColorConverter : MarkupExtension, IValueConverter
     {
         private static PercentageColorConverter _instance;
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             if (_instance == null)
@@ -22,21 +19,18 @@ namespace CryptoApp.Converters
             }
             return _instance;
         }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double changePercent)
+            if (value is string stringValue)
             {
-                if (changePercent < 0)
+                if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double result))
                 {
-                    return new SolidColorBrush(Colors.Red);
-                }
-                else
-                {
-                    return new SolidColorBrush(Colors.Green);
+                    return result >= 0 ? Brushes.Green : Brushes.Red;
                 }
             }
 
-            return Binding.DoNothing;
+            return DependencyProperty.UnsetValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
